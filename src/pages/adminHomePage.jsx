@@ -13,7 +13,7 @@ export default function AdminHomePage() {
       <div className="bg-blue-700 w-[20%] h-screen flex flex-col items-center gap-6 pt-10 text-white">
 
         <Link className="flex flex-row items-center gap-2" to="/admin/dashboard">
-          <GoGraph /> Dashboard
+          <GoGraph /> Dashboard view
         </Link>
 
         <Link className="flex flex-row items-center gap-2" to="/admin/products">
