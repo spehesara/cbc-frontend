@@ -5,6 +5,7 @@ import { MdProductionQuantityLimits } from "react-icons/md";
 import { FaShoppingCart } from "react-icons/fa";
 import { FaUsers } from "react-icons/fa";
 import AdminProductsPage from "./admin/adminProductsPage";
+import AddProductForm from "./admin/addProductForm";
 
 export default function AdminHomePage() {
   return (
@@ -30,11 +31,12 @@ export default function AdminHomePage() {
 
       </div>
 
-      <div className="bg-red-600 w-[80%] h-screen">
+      <div className=" w-[80%] h-screen">
        <Routes paths="/*">
        
        <Route path="/dashboard" element={<h1>Dashboard</h1>}/>
         <Route path="/products" element={<AdminProductsPage/>}/>
+        <Route path="/products/addProduct" element={<AddProductForm/>}/>
         <Route path="/orders" element={<h1>Orders</h1>}/>
        <Route path="/customers" element={<h1>Customers</h1>}/>
 

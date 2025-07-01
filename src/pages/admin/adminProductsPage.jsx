@@ -1,18 +1,132 @@
-import axios from "axios"
+import axios from "axios";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { FaPencil, FaPlus, FaTrash } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
-export default function AdminProductsPage(){
+export default function AdminProductsPage() {
+  const [products, setProducts] = useState([]);
+  const [productsLoaded, setProductsLoaded] = useState(false)
 
-axios.get("http://localhost:5000/api/products").then((res)=>{
+  useEffect(() => {
 
-    console.log(res)
+if(!productsLoaded){
+
+ axios.get("http://localhost:5000/api/products").then((res) => {
+      setProducts(res.data);
+      setProductsLoaded(true)
+    });
+
+}
+
+   
+  }, [productsLoaded]);
+
+  return (
+    <div className="p-8 bg-gray-100 min-h-screen relative">
+      <Link to={"/admin/products/addProduct"} className="absolute right-[25px] bottom-[25px] text-[25px] bg-[#1d4ed7] text-white p-4 rounded-xl hover:bg-blue-400"><FaPlus/></Link>  
+
+      <h1 className="text-3xl font-bold mb-6 text-gray-800">Admin Products Page</h1>
+
+
+{
+
+productsLoaded? <div className="overflow-x-auto bg-white shadow-lg rounded-lg">
+        <table className="min-w-full divide-y divide-gray-200 text-sm text-left">
+          <thead className="bg-blue-700 text-white">
+            <tr>
+              <th className="px-6 py-3">Product ID</th>
+              <th className="px-6 py-3">Product Name</th>
+              <th className="px-6 py-3">Price ($)</th>
+              <th className="px-6 py-3">Last Price ($)</th>
+              <th className="px-6 py-3">Stock</th>
+              <th className="px-6 py-3">Description</th>
+              <th className="px-6 py-3">Action</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-100">
+            {products.map((product, index) => (
+              <tr key={product.productId} className="hover:bg-gray-50">
+                <td className="px-6 py-4">{product.productId}</td>
+                <td className="px-6 py-4">{product.productName}</td>
+                <td className="px-6 py-4">${product.price}</td>
+                <td className="px-6 py-4  text-red-500">${product.lastPrice}</td>
+                <td className="px-6 py-4">{product.stock}</td>
+                <td className="px-6 py-4 truncate max-w-xs">{product.description}</td>
+                <td className="px-6 py-4 flex space-x-3 text-blue-600">
+
+<button className="cursor-pointer hover:text-red-600"
+
+title="Delete"
+
+onClick={()=>{
+
+
+const token = localStorage.getItem("token");
+
+axios.delete(`http://localhost:5000/api/products/${product.productId}`, {
+headers :{
+Authorization : `Bearer ${token}`,
+
+},
+  
+
+
+}).then((res)=>{
+
+console.log(res.data)
+toast.success("Product Deleted Successfully")
+setProductsLoaded(false)
+
 })
 
-
-return(
-
-<div>Admin Products Page</div>
-
-)
+}}
 
 
+
+
+
+>
+
+<FaTrash  />
+
+
+</button>
+
+
+
+                  <FaPencil className="cursor-pointer hover:text-blue-800" />
+                  
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>:
+
+      <div className="w-full h-full flex justify-center items-center">
+
+<div className="w-[60px] h-[60px] border-[4px] border-gray-200 border-b-blue-700 animate-spin rounded-full">
+
+
+</div>
+
+
+</div>
+
+
+}
+
+
+
+
+
+
+
+
+     
+
+
+    </div>
+  );
 }
