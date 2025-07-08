@@ -1,12 +1,14 @@
 import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import uploadMediaToSupabase from "../../utils/mediaUpload";
 
 export default function AddProductForm() {
   const [productId, setProductId] = useState("");
   const [productName, setProductName] = useState("");
   const [altName, setAltName] = useState("");
-  const [images, setImages] = useState("");
+
+  const [imageFiles,setIamgeFiles] = useState([])
   const [price, setPrice] = useState("");
   const [lastPrice, setLastPrice] = useState("");
   const [description, setDescription] = useState("");
@@ -15,7 +17,21 @@ export default function AddProductForm() {
 async function handleSubmit(){
 
 const altNames = altName.split(",")
-const imgURLs = images.split(",")
+
+const promisesArray = []
+
+//images godak dammoth eewata adaala URLs ganna part eka, eeewa Promises widiyata print karagnne//
+for(let i=0; i<imageFiles.length;i++){
+
+  promisesArray[i] = uploadMediaToSupabase(imageFiles[i])
+
+}
+
+//Prmoise.all kiyala daala apita promisesArray ekak ma eka wara run karagnn puluwan//
+const imgURLs = await Promise.all(promisesArray)
+
+
+
 
 const product = {
 
@@ -96,10 +112,16 @@ toast.success("Product Added Successfully")
           <div className="flex flex-col">
             <label className="font-medium text-gray-700">Image URLs</label>
             <input
-              type="text"
+              type="file"
               className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-              value={images}
-              onChange={(e) => setImages(e.target.value)}
+          
+              onChange={(e) => {
+
+                setIamgeFiles(e.target.files)
+
+              }}
+multiple
+
             />
           </div>
 

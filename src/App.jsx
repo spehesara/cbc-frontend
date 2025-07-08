@@ -7,6 +7,7 @@ import LoginPage from './pages/LoginPage'
 import SignupPage from './pages/signInPage'
 import AdminHomePage from './pages/adminHomePage'
 import { Toaster } from 'react-hot-toast'
+import FileUploadTest from './pages/test'
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
     <Route path="/login" element={<LoginPage/>} />
  <Route path="/Signup" element={<SignupPage/>} />
   <Route path="/admin/*" element={<AdminHomePage/>} />
+  <Route path="/testing" element={<FileUploadTest/>}/>
 
 
     <Route path="/*" element={<HomePage/>} />
