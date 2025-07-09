@@ -9,7 +9,7 @@ const[password,setPassword] = useState("");
 
 function login(){
 
-axios.post("http://localhost:5000/api/users/login",{
+axios.post(import.meta.env.VITE_BACKEND_URL+"/api/users/login",{
 
 email : email,
 password : password
