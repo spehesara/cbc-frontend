@@ -3,6 +3,7 @@ import { createClient } from "@supabase/supabase-js"
 const url = "https://kjdtbwnojzhbuszmauew.supabase.co"
 
 const key = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtqZHRid25vanpoYnVzem1hdWV3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE1MjAxNTUsImV4cCI6MjA2NzA5NjE1NX0.xRmv2AhpwEfOmbpOcuz0PsOLS92O-N_MsJDcn-pEnhI`
+ const supabase = createClient(url, key)
 
 
 // export default function uploadMediaToSupabase(file) {
@@ -74,7 +75,6 @@ export default function mediaUpload(file) {
             reject("No file selected")
         }
 
- const supabase = createClient(url, key)
 
 		const timestamp = new Date().getTime();
 		const fileName = timestamp + file.name;
