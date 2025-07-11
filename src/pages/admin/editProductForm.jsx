@@ -196,7 +196,7 @@ export default function EditProductForm() {
                         onClick={handleSubmit}
 
                     >
-                        Edit Product
+                        Update Product
                     </button>
                 </div>
             </div>
