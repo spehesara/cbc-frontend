@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { FaPencil, FaPlus, FaTrash } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function AdminProductsPage() {
   const [products, setProducts] = useState([]);
@@ -22,6 +22,9 @@ if(!productsLoaded){
 
    
   }, [productsLoaded]);
+
+const navigate = useNavigate();
+
 
   return (
     <div className="p-8 bg-gray-100 min-h-screen relative">
@@ -94,9 +97,26 @@ setProductsLoaded(false)
 
 </button>
 
+<button className="cursor-pointer hover:text-blue-800"
+
+title="edit"
+
+onClick={()=>{
+                                       //State ekaka daala product details tika editProduct page ekata aran yanawa//
+navigate("/admin/products/editProduct", {state: {product:product}});
+  
+}}
 
 
-                  <FaPencil className="cursor-pointer hover:text-blue-800" />
+
+>
+ <FaPencil  />
+
+
+
+</button>
+
+                 
                   
                 </td>
               </tr>
