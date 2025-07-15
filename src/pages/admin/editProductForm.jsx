@@ -74,7 +74,7 @@ export default function EditProductForm() {
 
         try {
 
-            await axios.put(import.meta.env.VITE_BACKEND_URL + "/api/products" + product.productId, productData, {
+            await axios.put(import.meta.env.VITE_BACKEND_URL + "/api/products/" + product.productId, productData, {
                 headers: {
 
                     Authorization: "Bearer " + token
