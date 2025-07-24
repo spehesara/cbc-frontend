@@ -89,7 +89,7 @@ export default function EditProductForm() {
 
 
         } catch (err) {
-
+console.log(err)
             toast.error("Failed to update Product!")
 
         }
