@@ -82,6 +82,11 @@ console.log(res.data)
 toast.success("Product Deleted Successfully")
 setProductsLoaded(false)
 
+}).catch((err)=>{
+
+console.log(err)
+toast.error("Failed to delete Product!")
+
 })
 
 }}

@@ -15,10 +15,12 @@ export default function ProductOverview() {
             try {
                 const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/products/${productId}`);
                 if (res.data) {
+                    console.log(res.data);
                     setProduct(res.data);
                     setStatus("found");
-                    console.log(res.data);
+                    
                 } else {
+                   
                     setStatus("not-found");
                 }
             } catch (error) {

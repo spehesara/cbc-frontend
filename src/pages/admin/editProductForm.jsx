@@ -34,31 +34,20 @@ export default function EditProductForm() {
 
         const altNames = altName.split(",")
 
-        const promisesArray = []
-        let imgURLs = product.images
+        const promisesArray = [];
+        let imgURLs = product.images;
 
         if (imageFiles.length > 0) {
-
-            //images godak dammoth eewata adaala URLs ganna part eka, eeewa Promises widiyata print karagnne//
+            // Upload each image file and store the promises
             for (let i = 0; i < imageFiles.length; i++) {
-
-                promisesArray[i] = uploadMediaToSupabase(imageFiles[i])
-
+                promisesArray[i] = uploadMediaToSupabase(imageFiles[i]);
             }
 
-
-            //Prmoise.all kiyala daala apita promisesArray ekak ma eka wara run karagnn puluwan//
-            const imgURLs = await Promise.all(promisesArray)
-
-
+            // Wait for all uploads to complete and assign the resulting URLs
+            imgURLs = await Promise.all(promisesArray);
         }
 
-
-
-
-
         const productData = {
-
             productId: productId,
             productName: productName,
             altName: altNames,
@@ -67,8 +56,8 @@ export default function EditProductForm() {
             lastPrice: lastPrice,
             description: description,
             stock: stock
+        };
 
-        }
         const token = localStorage.getItem("token")
 
 
@@ -89,7 +78,7 @@ export default function EditProductForm() {
 
 
         } catch (err) {
-console.log(err)
+            console.log(err)
             toast.error("Failed to update Product!")
 
         }
