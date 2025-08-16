@@ -81,6 +81,7 @@ Authorization : `Bearer ${token}`,
 console.log(res.data)
 toast.success("Product Deleted Successfully")
 setProductsLoaded(false)
+navigate("/admin/products");
 
 }).catch((err)=>{
 
